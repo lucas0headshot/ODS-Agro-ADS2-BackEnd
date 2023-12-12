@@ -3,6 +3,7 @@ package com.ods.agro.services;
 import com.ods.agro.enterprise.ValidationException;
 import com.ods.agro.entities.Produto;
 import com.ods.agro.repositories.ProdutoRepository;
+import com.ods.agro.repositories.VendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +43,7 @@ public class ProdutoService {
             produto.setDataProducao(modificado.getDataProducao());
             produto.setDataValidade(modificado.getDataValidade());
             produto.setFornecedor(modificado.getFornecedor());
+            produto.setQtdEstoque(modificado.getQtdEstoque());
             return produtoRepository.save(produto);
         }
 
