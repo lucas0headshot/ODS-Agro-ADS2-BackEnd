@@ -6,4 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FornecedorRepository extends JpaRepository<Fornecedor, Long> {
+
+    public Fornecedor findByCnpj(String cnpj);
+    public Fornecedor findByRazaoSocial(String razaoSocial);
+    public Fornecedor findByNomeFantasia(String nomeFantasia);
 }
