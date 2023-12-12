@@ -29,4 +29,7 @@ public class Produto extends EntityID{
 
     @Column(name = "dt_validade")
     private LocalDate dataValidade;
+
+    @Column(name = "qtd_estoque")
+    private Double qtdEstoque;
 }
