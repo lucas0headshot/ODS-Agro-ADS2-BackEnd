@@ -21,6 +21,10 @@ public class VendaService {
             throw new ValidationException("Não há estoque suficiente");
         }
 
+        if (venda.getQtdVendida() == 0){
+            throw new ValidationException("Quantidade da venda deve ser maior que zero");
+        }
+
         venda.getProduto().setQtdEstoque(venda.getProduto().getQtdEstoque() - venda.getQtdVendida());
         return vendaRepository.save(venda);
     }
