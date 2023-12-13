@@ -15,11 +15,11 @@ import java.time.LocalDate;
 public class Venda extends EntityID{
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
+    @JoinColumn(name = "cliente_id", referencedColumnName = "id", nullable = false)
     private Cliente cliente;
 
     @ManyToOne
-    @JoinColumn(name = "produto_id", referencedColumnName = "id")
+    @JoinColumn(name = "produto_id", referencedColumnName = "id",nullable = false)
     private Produto produto;
 
     @Column(name = "qtd_vendida")
