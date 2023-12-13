@@ -20,20 +20,19 @@ public class FornecedorService {
     private ClienteRepository clienteRepository;
 
     public Fornecedor salvarFornecedor(Fornecedor fornecedor){
-
-        if (fornecedorRepository.findByCnpj(fornecedor.getCnpj()) != null &
+        if (fornecedorRepository.findByCnpj(fornecedor.getCnpj()) != null ||
             clienteRepository.findByCnpj(fornecedor.getCnpj()) != null){
 
             throw new ValidationException("CNPJ já cadastrado na nossa base de dados!");
         }
 
-        if (fornecedorRepository.findByRazaoSocial(fornecedor.getRazaoSocial()) != null &
+        if (fornecedorRepository.findByRazaoSocial(fornecedor.getRazaoSocial()) != null ||
             clienteRepository.findByRazaoSocial(fornecedor.getRazaoSocial()) != null){
 
             throw new ValidationException("Razão social já cadastrada na nossa base dados!");
         }
 
-        if (fornecedorRepository.findByNomeFantasia(fornecedor.getNomeFantasia()) != null &
+        if (fornecedorRepository.findByNomeFantasia(fornecedor.getNomeFantasia()) != null ||
             clienteRepository.findByNomeFantasia(fornecedor.getNomeFantasia()) != null){
 
             throw new ValidationException("Nome fantasia já cadastrado na nossa base de dados!");
