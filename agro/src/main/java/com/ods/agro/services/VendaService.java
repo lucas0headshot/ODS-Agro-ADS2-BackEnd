@@ -1,7 +1,9 @@
 package com.ods.agro.services;
 
 import com.ods.agro.enterprise.ValidationException;
+import com.ods.agro.entities.Produto;
 import com.ods.agro.entities.Venda;
+import com.ods.agro.repositories.ProdutoRepository;
 import com.ods.agro.repositories.VendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +17,12 @@ public class VendaService {
     @Autowired
     private VendaRepository vendaRepository;
 
-    public Venda salvarVenda(Venda venda){
+    @Autowired
+    private ProdutoRepository produtoRepository;
 
-        if (venda.getQtdVendida() > venda.getProduto().getQtdEstoque()){
+    public Venda salvarVenda(Venda venda){
+        Optional<Produto> byId = produtoRepository.findById(venda.getProduto().getId());
+        if (venda.getQtdVendida() > byId.get().getQtdEstoque()){
             throw new ValidationException("Não há estoque suficiente");
         }
 
@@ -25,7 +30,7 @@ public class VendaService {
             throw new ValidationException("Quantidade da venda deve ser maior que zero");
         }
 
-        venda.getProduto().setQtdEstoque(venda.getProduto().getQtdEstoque() - venda.getQtdVendida());
+        venda.getProduto().setQtdEstoque(byId.get().getQtdEstoque() - venda.getQtdVendida());
         return vendaRepository.save(venda);
     }
 
