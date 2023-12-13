@@ -52,9 +52,14 @@ public class FornecedorService {
     public Fornecedor atualizarFornecedor(Long id, Fornecedor modificado){
         Optional<Fornecedor> optional = fornecedorRepository.findById(id);
 
-        if (optional.isPresent()){
-            var fornecedor = optional.get();
+        if (optional.isPresent()) {
+            Fornecedor fornecedor = optional.get();
+
+            fornecedor.setRazaoSocial(modificado.getRazaoSocial());
+            fornecedor.setNomeFantasia(modificado.getNomeFantasia());
+            fornecedor.setCnpj(modificado.getCnpj());
             fornecedor.setEndereco(modificado.getEndereco());
+
             return fornecedorRepository.save(fornecedor);
         }
         return null;
