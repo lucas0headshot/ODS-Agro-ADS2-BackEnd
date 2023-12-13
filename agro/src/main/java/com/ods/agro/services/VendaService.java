@@ -20,7 +20,7 @@ public class VendaService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    public Venda salvarVenda(Venda venda){
+    public Venda salvarVenda(Venda venda) {
         Optional<Produto> byId = produtoRepository.findById(venda.getProduto().getId());
         if (venda.getQtdVendida() > byId.get().getQtdEstoque()){
             throw new ValidationException("Não há estoque suficiente");
@@ -30,7 +30,7 @@ public class VendaService {
             throw new ValidationException("Quantidade da venda deve ser maior que zero");
         }
 
-        venda.getProduto().setQtdEstoque(byId.get().getQtdEstoque() - venda.getQtdVendida());
+        byId.get().setQtdEstoque(byId.get().getQtdEstoque() - venda.getQtdVendida());
         return vendaRepository.save(venda);
     }
 
