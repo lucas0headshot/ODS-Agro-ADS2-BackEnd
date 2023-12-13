@@ -22,9 +22,13 @@ public class Venda extends EntityID{
     @JoinColumn(name = "produto_id", referencedColumnName = "id")
     private Produto produto;
 
-    @Column(name = "qtd_produto")
-    private Double qtdProduto;
+    @Column(name = "qtd_vendida")
+    private Double qtdVendida;
 
     @Column(name = "dt_venda")
     private LocalDate dataVenda;
+
+    public Venda(){
+        this.dataVenda = LocalDate.now();
+    }
 }
