@@ -21,19 +21,19 @@ public class ClienteService {
 
     public Cliente salvarCliente(Cliente cliente){
 
-        if (clienteRepository.findByCnpj(cliente.getCnpj()) != null &
+        if (clienteRepository.findByCnpj(cliente.getCnpj()) != null ||
             fornecedorRepository.findByCnpj(cliente.getCnpj()) != null){
 
             throw new ValidationException("CNPJ já existente na nossa base de dados!");
         }
 
-        if (clienteRepository.findByRazaoSocial(cliente.getRazaoSocial()) != null &
+        if (clienteRepository.findByRazaoSocial(cliente.getRazaoSocial()) != null ||
             fornecedorRepository.findByRazaoSocial(cliente.getRazaoSocial()) != null){
 
             throw new ValidationException("Razão social já cadastrada na nossa base de dados");
         }
 
-        if (clienteRepository.findByNomeFantasia(cliente.getNomeFantasia()) != null &
+        if (clienteRepository.findByNomeFantasia(cliente.getNomeFantasia()) != null ||
             fornecedorRepository.findByNomeFantasia(cliente.getNomeFantasia()) != null){
 
             throw new ValidationException("Nome fantasia já cadastrado na nossa base dados!");
