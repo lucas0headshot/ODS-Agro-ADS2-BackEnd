@@ -36,7 +36,7 @@ public class ProdutoService {
         Optional<Produto> optional = produtoRepository.findById(id);
 
         if (optional.isPresent()){
-            var produto = new Produto();
+            var produto = optional.get();
             produto.setNome(modificado.getNome());
             produto.setPeso(modificado.getPeso());
             produto.setValor(modificado.getValor());

@@ -13,7 +13,6 @@ import java.util.Optional;
 
 @Service
 public class VendaService {
-
     @Autowired
     private VendaRepository vendaRepository;
 
@@ -22,11 +21,11 @@ public class VendaService {
 
     public Venda salvarVenda(Venda venda) {
         Optional<Produto> byId = produtoRepository.findById(venda.getProduto().getId());
-        if (venda.getQtdVendida() > byId.get().getQtdEstoque()){
+        if (venda.getQtdVendida() > byId.get().getQtdEstoque()) {
             throw new ValidationException("Não há estoque suficiente");
         }
 
-        if (venda.getQtdVendida() == 0){
+        if (venda.getQtdVendida() == 0) {
             throw new ValidationException("Quantidade da venda deve ser maior que zero");
         }
 
@@ -42,10 +41,10 @@ public class VendaService {
         return  vendaRepository.findAll();
     }
 
-    public Venda atualizarVenda(Long id, Venda modificado){
+    public Venda atualizarVenda(Long id, Venda modificado) {
         Optional<Venda> optional = vendaRepository.findById(id);
 
-        if (optional.isPresent()){
+        if (optional.isPresent()) {
             var venda = optional.get();
             venda.setDataVenda(modificado.getDataVenda());
             venda.setProduto(modificado.getProduto());
@@ -53,6 +52,7 @@ public class VendaService {
             venda.setQtdVendida(modificado.getQtdVendida());
             return vendaRepository.save(venda);
         }
+
         return null;
     }
 
