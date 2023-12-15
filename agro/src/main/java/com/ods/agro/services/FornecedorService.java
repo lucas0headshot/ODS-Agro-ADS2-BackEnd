@@ -55,9 +55,6 @@ public class FornecedorService {
         if (optional.isPresent()) {
             Fornecedor fornecedor = optional.get();
 
-            fornecedor.setRazaoSocial(modificado.getRazaoSocial());
-            fornecedor.setNomeFantasia(modificado.getNomeFantasia());
-            fornecedor.setCnpj(modificado.getCnpj());
             fornecedor.setEndereco(modificado.getEndereco());
 
             return fornecedorRepository.save(fornecedor);

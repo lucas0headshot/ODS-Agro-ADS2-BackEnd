@@ -54,8 +54,10 @@ public class ClienteService {
         Optional<Cliente> optional = clienteRepository.findById(id);
 
         if (optional.isPresent()){
-            var cliente = optional.get();
+            Cliente cliente = optional.get();
+
             cliente.setEndereco(modificado.getEndereco());
+
             return clienteRepository.save(cliente);
         }
 
