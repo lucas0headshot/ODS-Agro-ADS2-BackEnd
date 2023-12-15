@@ -1,6 +1,7 @@
 package com.ods.agro.controller;
 
 import com.ods.agro.enterprise.ValidationException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -35,6 +36,17 @@ public abstract class AbstractController {
             ValidationException ex) {
         Map<String, String> errors = new HashMap<>();
         errors.put("erro", ex.getMessage());
+        return errors;
+    }
+
+
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public Map<String, String> handleDataIntegrityViolationException(
+            ValidationException ex) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("erro", "Esta entidade não pode ser excluída!");
         return errors;
     }
 }
