@@ -1,0 +1,1 @@
+CREATE SCHEMA `estoque_ods` ;
